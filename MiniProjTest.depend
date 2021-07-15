@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1625578225 source:c:\users\deept\documents\codeblocks\miniprojtest\main.cpp
+	<windows.h>
+	<GL/glut.h>
+	<math.h>
+	<stdio.h>
+
+1426329928 c:\program files\codeblocks\mingw\include\gl\glut.h
+	"freeglut_std.h"
+
+1426329928 c:\program files\codeblocks\mingw\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1624377835 source:c:\users\deept\documents\codeblocks\miniprojtest\test.cpp
+	<windows.h>
+	<GL/glut.h>
+	<math.h>
+
+1426329928 c:\program files\codeblocks\mingw\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1426329928 c:\program files\codeblocks\mingw\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1625575318 source:c:\users\deept\documents\codeblocks\miniprojtest\triangle.cpp
+	<windows.h>
+	<GL/glut.h>
+	<math.h>
+	<stdio.h>
+
+1625577146 source:c:\users\deept\documents\codeblocks\miniprojtest\color.c
+

@@ -10,19 +10,11 @@
 
 float thetha;
 int radius = 30;
-float xpos = 200;
-float ypos = 200;
-float triangleX[2] = { 250, 500 };
-float triangleY[2] = { 350, 500 };
+int xpos = 200;
+int ypos = 200;
+float triangleX[1] = { 300, 400 };
+float triangleY[1] = { 300, 400 };
 
-void check()
-{
-    for(int i=0; i<2; i++)
-    {
-        if(xpos>triangleX[i]-30.0 && xpos<triangleX[i]+30.0)
-            printf("\nYou touched the line");
-    }
-}
 void triangle(int x, int y)
 {
     glColor3f(0.92,0.29,0.4);
@@ -97,7 +89,6 @@ void display()
     glutSwapBuffers();
     glutPostRedisplay();
 
-    //printf("xpos : %f\t y ypos: %f\n",xpos,ypos);
 }
 void key(int key, int x, int y) // function to make the user able to deal with the system
 {

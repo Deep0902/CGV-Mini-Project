@@ -127,7 +127,7 @@ int main(int argc, char** argv)
 	init();
 	glutDisplayFunc(display);
 
-	//glutSpecialFunc(key);// sets the special keyboard callback for the current window.
+    glutSpecialFunc(key);// sets the special keyboard callback for the current window.
                          //The special keyboard callback is triggered when keyboard function or directional keys are pressed.
 	glutMainLoop(); // enters the GLUT event processing loop
 	return 0;

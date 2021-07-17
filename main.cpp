@@ -22,6 +22,17 @@ void triangle(int x, int y)
     glEnd();
 }
 
+void rectangularBoundry()
+{
+    glColor3f(1,0,0);
+
+    glBegin(GL_LINE_LOOP);   //coordinates of the boundry
+        glVertex2f(100,100); //bottom left
+        glVertex2f(100,900); //top left
+        glVertex2f(900,900); //top right
+        glVertex2f(900,100); //bottom right
+    glEnd();
+}
 void init()// prepare the window for displaying
 {
     glClearColor(1, 1, 1, 1);
@@ -32,6 +43,7 @@ void init()// prepare the window for displaying
 void draw_moving_circle()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+
 
     glColor3f(1,0,0);
 
@@ -106,10 +118,12 @@ int main(int argc, char** argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowPosition(50, 50);
-	glutInitWindowSize(600, 600); //sets the initial window size
+	glutInitWindowSize(700, 700); //sets the initial window size
 	glutCreateWindow("TEST Proj"); // creates the window with name line
 	init();
+	rectangularBoundry();
 	glutDisplayFunc(draw_moving_circle);
+
 	glutSpecialFunc(key);// sets the special keyboard callback for the current window.
                          //The special keyboard callback is triggered when keyboard function or directional keys are pressed.
 	glutMainLoop(); // enters the GLUT event processing loop

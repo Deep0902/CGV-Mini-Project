@@ -10,8 +10,8 @@ float thetha;
 int radius = 30;
 int xpos = 200.0;
 int ypos = 200.0;
-int triangleX = 300;
-int triangleY = 500;
+float triangleX = 300;
+float triangleY = 500;
 
 void triangle(int x, int y)
 {
@@ -54,11 +54,14 @@ void init()// prepare the window for displaying
 }
 void display()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    //glLoadIdentity();
+
+    triangleY-=0.02;
 
     rectangularBoundry();
 
-    //-----------------------Moving triangles--------------
+    //-----------------------Moving shapes--------------
     glPushMatrix();
     glTranslatef(triangleX,triangleY,0);
     triangle(0,0);
@@ -70,8 +73,8 @@ void display()
     ball();
     glPopMatrix();
 
-	glutSwapBuffers();
-	glutPostRedisplay();
+    glutSwapBuffers();
+    glutPostRedisplay();
 
 }
 void key(int key, int x, int y) // function to make the user able to deal with the system
@@ -117,12 +120,11 @@ int main(int argc, char** argv)
 {
     printf("Use arrow keys to move the circle");
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB|GLUT_DEPTH);
 	glutInitWindowPosition(50, 50);
 	glutInitWindowSize(700, 700); //sets the initial window size
 	glutCreateWindow("TEST Proj"); // creates the window with name line
 	init();
-	rectangularBoundry();
 	glutDisplayFunc(display);
 
 	//glutSpecialFunc(key);// sets the special keyboard callback for the current window.

@@ -17,23 +17,12 @@ void triangle(int x, int y)
 {
     glColor3f(0.92,0.29,0.4);
     glBegin(GL_POLYGON); // drawing a Triangle
-        glVertex2f(x,y);
-        glVertex2f(x+50,y+50);
-        glVertex2f(x+100,y);
+        glVertex2f(x,0);
+        glVertex2f(x+50,50);
+        glVertex2f(x+100,0);
     glEnd();
 }
 
-void ball()
-{
-    glBegin(GL_POLYGON);
-    glColor3f(0.33, 0.43, 0.9);
-        for(int i=0; i<360; i++)
-        {
-            thetha = i*PI/180; //convert to radian
-            glVertex2f(radius*cos(thetha),radius*sin(thetha));
-        }
-    glEnd();
-}
 void rectangularBoundry()
 {
     glColor3f(1,0,0);
@@ -52,11 +41,22 @@ void init()// prepare the window for displaying
 	gluOrtho2D(0,1000,0,1000);
 
 }
-void display()
+void draw_moving_circle()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    rectangularBoundry();
+    glLoadIdentity();
+
+    triangleY-=0.02;
+
+    glColor3f(1,0,0);
+
+    glBegin(GL_LINE_LOOP);   //coordinates of the boundry
+        glVertex2f(100,100); //bottom left
+        glVertex2f(100,900); //top left
+        glVertex2f(900,900); //top right
+        glVertex2f(900,100); //bottom right
+    glEnd();
 
     //-----------------------Moving triangles--------------
     glPushMatrix();
@@ -65,11 +65,16 @@ void display()
     glPopMatrix();
 
     //------------------------Circle-------------------------
-    glPushMatrix();
-    glTranslatef(xpos,ypos,0);
-    ball();
-    glPopMatrix();
+    glBegin(GL_POLYGON);
+    glColor3f(0.33, 0.43, 0.9);
+        for(int i=0; i<360; i++)
+        {
+            thetha = i*PI/180; //convert to radian
+            glVertex2f(xpos+radius*cos(thetha),ypos+radius*sin(thetha));
+        }
 
+
+    glEnd();
 	glutSwapBuffers();
 	glutPostRedisplay();
 
@@ -123,7 +128,7 @@ int main(int argc, char** argv)
 	glutCreateWindow("TEST Proj"); // creates the window with name line
 	init();
 	rectangularBoundry();
-	glutDisplayFunc(display);
+	glutDisplayFunc(draw_moving_circle);
 
 	//glutSpecialFunc(key);// sets the special keyboard callback for the current window.
                          //The special keyboard callback is triggered when keyboard function or directional keys are pressed.

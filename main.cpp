@@ -10,15 +10,15 @@ float thetha;
 int radius = 30;
 int xpos = 200.0;
 int ypos = 200.0;
-int triangleY = 500;
+int triangleY = 0;
 
 void triangle(int x, int y)
 {
     glColor3f(0.92,0.29,0.4);
     glBegin(GL_POLYGON); // drawing a Triangle
-        glVertex2f(x,triangleY);
-        glVertex2f(x+50,triangleY+50);
-        glVertex2f(x+100,triangleY);
+        glVertex2f(x,0);
+        glVertex2f(x+50,50);
+        glVertex2f(x+100,0);
     glEnd();
 }
 
@@ -54,11 +54,10 @@ void draw_moving_circle()
         glVertex2f(900,100); //bottom right
     glEnd();
 
-    if(triangleY > 100)
-    {
-       triangle(500,500);
-    }
-    triangleY = triangleY - 2;
+    glPushMatrix();
+    glTranslatef(300,200,0);
+    triangle(0,0);
+    glPopMatrix();
 
     glBegin(GL_POLYGON);
     glColor3f(0.33, 0.43, 0.9);
@@ -68,7 +67,9 @@ void draw_moving_circle()
             glVertex2f(xpos+radius*cos(thetha),ypos+radius*sin(thetha));
         }
 
+
     glEnd();
+
     //glFlush();
 	glutSwapBuffers();
 

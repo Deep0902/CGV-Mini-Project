@@ -45,26 +45,20 @@ void rectangularBoundry()
         glVertex2f(900,100); //bottom right
     glEnd();
 }
-void init()// prepare the window for displaying
-{
-    glClearColor(1, 1, 1, 1);
-	glMatrixMode(GL_PROJECTION);
-	gluOrtho2D(0,1000,0,1000);
 
-}
 void display()
 {
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    //glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT);
 
-    triangleY-=0.02;
+
 
     rectangularBoundry();
 
     //-----------------------Moving shapes--------------
     glPushMatrix();
-    glTranslatef(triangleX,triangleY,0);
-    triangle(0,0);
+        glTranslatef(triangleX,triangleY,0);
+        triangle(0,0);
+        triangleY-=0.02;
     glPopMatrix();
 
     //------------------------Circle-------------------------
@@ -115,12 +109,18 @@ void key(int key, int x, int y) // function to make the user able to deal with t
             break;
 	}
 }
+void init()// prepare the window for displaying
+{
+    glClearColor(1, 1, 1, 1);
+	glMatrixMode(GL_PROJECTION);
+	gluOrtho2D(0,1000,0,1000);
 
+}
 int main(int argc, char** argv)
 {
     printf("Use arrow keys to move the circle");
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB|GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
 	glutInitWindowPosition(50, 50);
 	glutInitWindowSize(700, 700); //sets the initial window size
 	glutCreateWindow("TEST Proj"); // creates the window with name line

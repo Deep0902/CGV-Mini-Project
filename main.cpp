@@ -12,6 +12,8 @@ float thetha;
 int radius = 30;
 float xpos = 200;
 float ypos = 200;
+float speed = 0;
+int times = 0;
 float triangleX[2] = { 250, 500 };
 float triangleY[2] = { 350, 500 };
 
@@ -68,22 +70,42 @@ void display()
     glPushMatrix();
         glTranslatef(triangleX[0],triangleY[0],0);
         triangle(0,0);
-        triangleY[0]-=0.05;
+        triangleY[0]-=0.05+speed;
         if(triangleY[0]<100)
         {
             triangleY[0]=500;
-            triangleX[0] = rand()%800 +100;
+            triangleX[0] = rand()%750 +100;
+            times ++;
+            if(times == 5)
+            {
+                speed = 0;
+                times = 0;
+            }
+            else
+            {
+                speed+=0.02;
+            }
         }
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(triangleX[1],triangleY[1],0);
         triangle(0,0);
-        triangleY[1]-=0.05;
+        triangleY[1]-=0.05+speed;
         if(triangleY[1]<100)
         {
             triangleY[1]=500;
-            triangleX[1] = rand()%800 +100;
+            triangleX[1] = rand()%750 + 100;
+            times ++;
+            if(times == 5)
+            {
+                speed = 0;
+                times = 0;
+            }
+            else
+            {
+                speed+=0.02;
+            }
         }
     glPopMatrix();
 

@@ -39,11 +39,12 @@
 
 1625577146 source:c:\users\deept\documents\codeblocks\miniprojtest\color.c
 
-1626754233 source:c:\projects\cgv-mini-project\main.cpp
+1627910736 source:c:\projects\cgv-mini-project\main.cpp
 	<windows.h>
 	<GL/glut.h>
 	<math.h>
 	<iostream>
 	<stdio.h>
+	<process.h>
 	<ctime>
 

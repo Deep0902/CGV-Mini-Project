@@ -3,6 +3,7 @@
 #include<math.h>
 #include<iostream>
 #include<stdio.h>
+#include<process.h>
 #include<ctime>
 #define PI 3.14159
 
@@ -14,26 +15,8 @@ float xpos = 200;
 float ypos = 200;
 float speed = 0;
 int times = 0;
-float triangleX[2] = { 250, 500 };
-float triangleY[2] = { 350, 500 };
-
-void check()
-{
-    for(int i=0; i<2; i++)
-    {
-        if(xpos>triangleX[i]-30.0 && xpos<triangleX[i]+30.0)
-            printf("\nYou touched the line");
-    }
-}
-void triangle(int x, int y)
-{
-    glColor3f(0.92,0.29,0.4);
-    glBegin(GL_POLYGON); // drawing a Triangle
-        glVertex2f(x,y);
-        glVertex2f(x+50,y+50);
-        glVertex2f(x+100,y);
-    glEnd();
-}
+float triangleX[3] = { 250, 500, 700};
+float triangleY[3] = { 350, 500, 600};
 
 void ball()
 {
@@ -46,6 +29,44 @@ void ball()
         }
     glEnd();
 }
+void finish()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.8,0.83,1,1);
+    glColor3f(1,0,0);
+    glRasterPos3f(400,500,0);
+    char msg1[] = "GAME OVER!";
+    for(int i=0; i<strlen(msg1);i++)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,msg1[i]);
+    glutSwapBuffers();
+}
+
+
+void check()
+{
+    for(int i=0; i<2; i++)
+    {
+        if(xpos>triangleX[i]-30 && xpos<triangleX[i]+130.0 && ypos>triangleY[i]-30.0 && ypos<triangleY[i]+50.0)
+        {
+            printf("\nYou touched the line");
+            glutDisplayFunc(finish);
+            glutPostRedisplay();
+        }
+    }
+}
+
+
+void triangle(int x, int y)
+{
+    glColor3f(0.92,0.29,0.4);
+    glBegin(GL_POLYGON); // drawing a Triangle
+        glVertex2f(x,y);
+        glVertex2f(x+50,y+50);
+        glVertex2f(x+100,y);
+    glEnd();
+}
+
+
 void rectangularBoundry()
 {
     glColor3f(1,0,0);
@@ -61,7 +82,8 @@ void rectangularBoundry()
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-
+    check();
+    printf("x pos = %f y pos = %f trianglex[0] = %f triangley[0] = %f\n",xpos,ypos,triangleX[0],triangleY[0]);
     rectangularBoundry();
 
     //-----------------------Moving shapes--------------
@@ -72,7 +94,7 @@ void display()
         if(triangleY[0]<100)
         {
             triangleY[0]=500;
-            triangleX[0] = rand()%750 +100;
+            triangleX[0] = rand()%720 +100;
             times ++;
             if(times == 5)
             {
@@ -93,7 +115,7 @@ void display()
         if(triangleY[1]<100)
         {
             triangleY[1]=500;
-            triangleX[1] = rand()%750 + 100;
+            triangleX[1] = rand()%720 + 100;
             times ++;
             if(times == 5)
             {
@@ -106,6 +128,8 @@ void display()
             }
         }
     glPopMatrix();
+
+
 
 
     //------------------------Circle-------------------------
@@ -164,6 +188,53 @@ void init()// prepare the window for displaying
 	gluOrtho2D(0,1000,0,1000);
 
 }
+void intro()
+{
+    glClearColor(0.9,0.9,0.9,1);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(0,0,0);
+    glRasterPos3f(380,900,0);
+    char msg1[] = "BALL-DER-DASH!";
+    for(int i=0; i<strlen(msg1);i++)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,msg1[i]);
+
+    glRasterPos3f(450,850,0);
+    char msg2[] = "RULES!";
+    for(int i=0; i<strlen(msg2);i++)
+        glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg2[i]);
+
+    glPushMatrix();
+        glTranslatef(150,650,0);
+        ball();
+    glPopMatrix();
+    glRasterPos3f(128,580,0);
+        char msg4[] = "Ball";
+        for(int i=0; i<strlen(msg4);i++)
+            glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg4[i]);
+
+    glPushMatrix();
+        glTranslatef(330,500,0);
+        glScalef(0.3,0.3,1);
+        rectangularBoundry();
+    glPopMatrix();
+    glRasterPos3f(440,480,0);
+        char msg5[] = "Boundry";
+        for(int i=0; i<strlen(msg5);i++)
+            glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg5[i]);
+
+    glPushMatrix();
+        glTranslatef(800,600,0);
+        triangle(0,0);
+    glPopMatrix();
+
+    glColor3f(0,0,0);
+    glRasterPos3f(200,50,0);
+    char msg3[] = "BY : 1BY18S225 - DEEP RAKESH & 1BY18CS076 - KIRTHAN";
+    for(int i=0; i<strlen(msg3);i++)
+        glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg3[i]);
+    glutSwapBuffers();
+}
+
 int main(int argc, char** argv)
 {
     srand(time(NULL)); // to use random function
@@ -174,10 +245,12 @@ int main(int argc, char** argv)
 	glutInitWindowSize(700, 700); //sets the initial window size
 	glutCreateWindow("TEST Proj"); // creates the window with name line
 	init();
-	glutDisplayFunc(display);
+
+	glutDisplayFunc(intro);
 
     glutSpecialFunc(key);// sets the special keyboard callback for the current window.
                          //The special keyboard callback is triggered when keyboard function or directional keys are pressed.
+
 	glutMainLoop(); // enters the GLUT event processing loop
 	return 0;
 }

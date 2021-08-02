@@ -15,8 +15,8 @@ float xpos = 160;
 float ypos = 170;
 float speed = 0;
 int times = 0;
-float triangleX[4] = {250, 500, 700, 150};
-float triangleY[4] = {350, 500, 620, 450};
+float triangleX[5] = {250, 500, 700, 150, 450};
+float triangleY[5] = {350, 500, 620, 450, 700};
 
 void ball()
 {
@@ -31,11 +31,11 @@ void ball()
 }
 void finish()
 {
-    glClearColor(0.8,0.83,1,1);
+    glClearColor(0.99,0.99,0.19,1);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glColor3f(0.99,0.29,0.4);
-    glRasterPos3f(380,500,0);
+    glColor3f(0.17,0.17,0.17);
+    glRasterPos3f(370,490,0);
     char msg1[] = "GAME OVER!";
     for(int i=0; i<strlen(msg1);i++)
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg1[i]);
@@ -52,7 +52,7 @@ void check()
 {
     for(int i=0; i<2; i++)
     {
-        if(xpos>triangleX[i]-30 && xpos<triangleX[i]+130.0 && ypos>triangleY[i]-30.0 && ypos<triangleY[i]+50.0)
+        if(xpos>triangleX[i]-30 && xpos<triangleX[i]+140.0 && ypos>triangleY[i]-30.0 && ypos<triangleY[i]+50.0)
         {
             printf("\nYou touched the line ");
             glutDisplayFunc(finish);
@@ -73,7 +73,7 @@ void triangle(int x, int y)
 
 void rectangularBoundry()
 {
-    glClearColor(0.99,0.82,0.18,1);//yellow
+    glColor3f(0.29,0.81,0.21);//yellow
 
     glBegin(GL_LINE_LOOP);   //coordinates of the boundry
         glVertex2f(100,100); //bottom left
@@ -89,7 +89,7 @@ void display()
     glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
     check();
-    printf("x pos = %f y pos = %f trianglex[0] = %f triangley[0] = %f\n",xpos,ypos,triangleX[0],triangleY[0]);
+    //printf("x pos = %f y pos = %f trianglex[0] = %f triangley[0] = %f\n",xpos,ypos,triangleX[0],triangleY[0]);
     rectangularBoundry();
 
     //-----------------------Moving shapes------------------------
@@ -178,11 +178,32 @@ void display()
         }
     glPopMatrix();
 
+    glPushMatrix();
+        glTranslatef(triangleX[4],triangleY[4],0);
+        triangle(0,0);
+        triangleY[4]-=0.05+speed;
+        if(triangleY[4]<100)
+        {
+            triangleY[4]=500;
+            triangleX[4] = rand()%720 +100;
+            times ++;
+            if(times == 5)
+            {
+                speed = 0;
+                times = 0;
+            }
+            else
+            {
+                speed+=0.02;
+            }
+        }
+    glPopMatrix();
+
 
     //------------------------Circle-------------------------
     glPushMatrix();
-    glTranslatef(xpos,ypos,0);
-    ball();
+        glTranslatef(xpos,ypos,0);
+        ball();
     glPopMatrix();
 
     glutSwapBuffers();
@@ -211,21 +232,21 @@ void key(int key, int x, int y) // function to make the user able to deal with t
             glutPostRedisplay();
             break;
 
-        case GLUT_KEY_UP:
-            if(ypos < 900 - radius - 2)
-                ypos = ypos + 5;
-            else
-                ypos = ypos + 0;
-            glutPostRedisplay();
-            break;
-
-        case GLUT_KEY_DOWN:
-            if(ypos < 100 + radius + 2)
-                ypos = ypos + 0;
-            else
-                ypos = ypos - 5;
-            glutPostRedisplay();
-            break;
+//        case GLUT_KEY_UP:
+//            if(ypos < 900 - radius - 2)
+//                ypos = ypos + 5;
+//            else
+//                ypos = ypos + 0;
+//            glutPostRedisplay();
+//            break;
+//
+//        case GLUT_KEY_DOWN:
+//            if(ypos < 100 + radius + 2)
+//                ypos = ypos + 0;
+//            else
+//                ypos = ypos - 5;
+//            glutPostRedisplay();
+//            break;
         case GLUT_KEY_HOME:
             glutDisplayFunc(display);
             glutPostRedisplay();
@@ -241,7 +262,7 @@ void init()// prepare the window for displaying
 }
 void intro()
 {
-    glClearColor(0.9,0.9,0.9,1);
+    glClearColor(0.99,0.99,0.84,1);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(0,0,0);
     glRasterPos3f(360,900,0);
@@ -264,11 +285,11 @@ void intro()
             glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg4[i]);
 
     glPushMatrix();
-        glTranslatef(340,500,0);
+        glTranslatef(350,500,0);
         glScalef(0.3,0.3,1);
         rectangularBoundry();
     glPopMatrix();
-    glRasterPos3f(450,480,0);
+    glRasterPos3f(460,480,0);
         char msg5[] = "Boundry";
         for(int i=0; i<strlen(msg5);i++)
             glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg5[i]);
@@ -283,8 +304,8 @@ void intro()
             glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg6[i]);
 
     glColor3f(0.2,0.2,0.2);
-    glRasterPos3f(160,310,0);
-        char msg7[] = "Move the ball using arrow keys and dodge the obstacles";
+    glRasterPos3f(120,310,0);
+        char msg7[] = "Move the ball using left and right arrow keys and dodge the obstacles";
         for(int i=0; i<strlen(msg7);i++)
             glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,msg7[i]);
 

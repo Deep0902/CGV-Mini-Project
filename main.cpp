@@ -21,7 +21,7 @@ float triangleY[4] = {350, 500, 620, 450};
 void ball()
 {
     glBegin(GL_POLYGON);
-    glColor3f(0.33, 0.43, 0.9);
+    glColor3f(0.33, 0.43, 0.9); //green
         for(int i=0; i<360; i++)
         {
             thetha = i*PI/180; //convert to radian
@@ -54,7 +54,7 @@ void check()
     {
         if(xpos>triangleX[i]-30 && xpos<triangleX[i]+130.0 && ypos>triangleY[i]-30.0 && ypos<triangleY[i]+50.0)
         {
-            printf("\nYou touched the line");
+            printf("\nYou touched the line ");
             glutDisplayFunc(finish);
             glutPostRedisplay();
         }
@@ -73,7 +73,7 @@ void triangle(int x, int y)
 
 void rectangularBoundry()
 {
-    glColor3f(1,0.1,0.1);
+    glClearColor(0.99,0.82,0.18,1);//yellow
 
     glBegin(GL_LINE_LOOP);   //coordinates of the boundry
         glVertex2f(100,100); //bottom left
@@ -81,17 +81,18 @@ void rectangularBoundry()
         glVertex2f(900,900); //top right
         glVertex2f(900,100); //bottom right
     glEnd();
+    glFlush();
 }
 
 void display()
 {
-    glClearColor(0.9,0.9,0.9,1);
+    glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
     check();
     printf("x pos = %f y pos = %f trianglex[0] = %f triangley[0] = %f\n",xpos,ypos,triangleX[0],triangleY[0]);
     rectangularBoundry();
 
-    //-----------------------Moving shapes--------------
+    //-----------------------Moving shapes------------------------
     glPushMatrix();
         glTranslatef(triangleX[0],triangleY[0],0);
         triangle(0,0);
@@ -282,10 +283,10 @@ void intro()
             glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg6[i]);
 
     glColor3f(0.2,0.2,0.2);
-    glRasterPos3f(150,310,0);
+    glRasterPos3f(160,310,0);
         char msg7[] = "Move the ball using arrow keys and dodge the obstacles";
         for(int i=0; i<strlen(msg7);i++)
-            glutBitmapCharacter(GLUT_BITMAP_9_BY_15,msg7[i]);
+            glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,msg7[i]);
 
     glRasterPos3f(390,260,0);
     char msg8[] = "Press HOME to start";
@@ -314,7 +315,7 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
 	glutInitWindowPosition(50, 50);
 	glutInitWindowSize(700, 700); //sets the initial window size
-	glutCreateWindow("TEST Proj"); // creates the window with name line
+	glutCreateWindow("BALL-DER-DASH"); // creates the window with name line
 	init();
 
 	glutDisplayFunc(intro);

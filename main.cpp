@@ -179,6 +179,10 @@ void key(int key, int x, int y) // function to make the user able to deal with t
                 ypos = ypos - 5;
             glutPostRedisplay();
             break;
+        case GLUT_KEY_HOME:
+            glutDisplayFunc(display);
+            glutPostRedisplay();
+            break;
 	}
 }
 void init()// prepare the window for displaying
@@ -193,10 +197,10 @@ void intro()
     glClearColor(0.9,0.9,0.9,1);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(0,0,0);
-    glRasterPos3f(380,900,0);
+    glRasterPos3f(350,900,0);
     char msg1[] = "BALL-DER-DASH!";
     for(int i=0; i<strlen(msg1);i++)
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,msg1[i]);
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg1[i]);
 
     glRasterPos3f(450,850,0);
     char msg2[] = "RULES!";
@@ -226,12 +230,28 @@ void intro()
         glTranslatef(800,600,0);
         triangle(0,0);
     glPopMatrix();
+    glRasterPos3f(797,560,0);
+        char msg6[] = "Obstacles";
+        for(int i=0; i<strlen(msg6);i++)
+            glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg6[i]);
 
-    glColor3f(0,0,0);
-    glRasterPos3f(200,50,0);
+    glColor3f(0.2,0.2,0.2);
+    glRasterPos3f(150,310,0);
+        char msg7[] = "Move the ball using arrow keys and dodge the obstacles";
+        for(int i=0; i<strlen(msg7);i++)
+            glutBitmapCharacter(GLUT_BITMAP_9_BY_15,msg7[i]);
+
+    glRasterPos3f(390,90,0);
+    char msg8[] = "Press HOME to start";
+    for(int i=0; i<strlen(msg8);i++)
+        glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg8[i]);
+
+    glRasterPos3f(30,50,0);
     char msg3[] = "BY : 1BY18S225 - DEEP RAKESH & 1BY18CS076 - KIRTHAN";
     for(int i=0; i<strlen(msg3);i++)
-        glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg3[i]);
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg3[i]);
+
+
     glutSwapBuffers();
 }
 

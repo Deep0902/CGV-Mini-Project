@@ -31,14 +31,20 @@ void ball()
 }
 void finish()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.8,0.83,1,1);
-    glColor3f(1,0,0);
-    glRasterPos3f(400,500,0);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glColor3f(0.99,0.29,0.4);
+    glRasterPos3f(380,500,0);
     char msg1[] = "GAME OVER!";
     for(int i=0; i<strlen(msg1);i++)
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,msg1[i]);
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg1[i]);
     glutSwapBuffers();
+    radius = 30;
+    xpos = 200;
+    ypos = 200;
+    speed = 0;
+    times = 0;
 }
 
 
@@ -55,7 +61,6 @@ void check()
     }
 }
 
-
 void triangle(int x, int y)
 {
     glColor3f(0.92,0.29,0.4);
@@ -69,7 +74,7 @@ void triangle(int x, int y)
 
 void rectangularBoundry()
 {
-    glColor3f(1,0,0);
+    glColor3f(1,0.1,0.1);
 
     glBegin(GL_LINE_LOOP);   //coordinates of the boundry
         glVertex2f(100,100); //bottom left
@@ -81,6 +86,7 @@ void rectangularBoundry()
 
 void display()
 {
+    glClearColor(0.9,0.9,0.9,1);
     glClear(GL_COLOR_BUFFER_BIT);
     check();
     printf("x pos = %f y pos = %f trianglex[0] = %f triangley[0] = %f\n",xpos,ypos,triangleX[0],triangleY[0]);
@@ -128,9 +134,6 @@ void display()
             }
         }
     glPopMatrix();
-
-
-
 
     //------------------------Circle-------------------------
     glPushMatrix();
@@ -197,12 +200,12 @@ void intro()
     glClearColor(0.9,0.9,0.9,1);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(0,0,0);
-    glRasterPos3f(350,900,0);
+    glRasterPos3f(360,900,0);
     char msg1[] = "BALL-DER-DASH!";
     for(int i=0; i<strlen(msg1);i++)
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg1[i]);
 
-    glRasterPos3f(450,850,0);
+    glRasterPos3f(460,850,0);
     char msg2[] = "RULES!";
     for(int i=0; i<strlen(msg2);i++)
         glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg2[i]);
@@ -217,11 +220,11 @@ void intro()
             glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg4[i]);
 
     glPushMatrix();
-        glTranslatef(330,500,0);
+        glTranslatef(340,500,0);
         glScalef(0.3,0.3,1);
         rectangularBoundry();
     glPopMatrix();
-    glRasterPos3f(440,480,0);
+    glRasterPos3f(450,480,0);
         char msg5[] = "Boundry";
         for(int i=0; i<strlen(msg5);i++)
             glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg5[i]);
@@ -241,15 +244,20 @@ void intro()
         for(int i=0; i<strlen(msg7);i++)
             glutBitmapCharacter(GLUT_BITMAP_9_BY_15,msg7[i]);
 
-    glRasterPos3f(390,90,0);
+    glRasterPos3f(390,260,0);
     char msg8[] = "Press HOME to start";
     for(int i=0; i<strlen(msg8);i++)
         glutBitmapCharacter(GLUT_BITMAP_8_BY_13,msg8[i]);
 
-    glRasterPos3f(30,50,0);
-    char msg3[] = "BY : 1BY18S225 - DEEP RAKESH & 1BY18CS076 - KIRTHAN";
+    glRasterPos3f(360,100,0);
+    char msg3[] = "SUBMITTED BY";
     for(int i=0; i<strlen(msg3);i++)
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg3[i]);
+
+    glRasterPos3f(80,50,0);
+    char msg9[] = "1BY18S225 : DEEP RAKESH , 1BY18CS076 : KIRTHAN";
+    for(int i=0; i<strlen(msg9);i++)
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg9[i]);
 
 
     glutSwapBuffers();

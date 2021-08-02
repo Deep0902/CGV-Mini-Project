@@ -232,21 +232,6 @@ void key(int key, int x, int y) // function to make the user able to deal with t
             glutPostRedisplay();
             break;
 
-//        case GLUT_KEY_UP:
-//            if(ypos < 900 - radius - 2)
-//                ypos = ypos + 5;
-//            else
-//                ypos = ypos + 0;
-//            glutPostRedisplay();
-//            break;
-//
-//        case GLUT_KEY_DOWN:
-//            if(ypos < 100 + radius + 2)
-//                ypos = ypos + 0;
-//            else
-//                ypos = ypos - 5;
-//            glutPostRedisplay();
-//            break;
         case GLUT_KEY_HOME:
             glutDisplayFunc(display);
             glutPostRedisplay();

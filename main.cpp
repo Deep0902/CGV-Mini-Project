@@ -31,7 +31,7 @@ void ball()
 }
 void finish()
 {
-    glClearColor(0.99,0.99,0.19,1);
+    glClearColor(0.99,0.99,0.29,1);
     glClear(GL_COLOR_BUFFER_BIT);
 
     glColor3f(0.17,0.17,0.17);

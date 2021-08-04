@@ -71,7 +71,7 @@ void triangle(int x, int y)
     glEnd();
 }
 
-void rectangularBoundry()
+void rectangularBoundary()
 {
     glColor3f(0.29,0.81,0.21);//yellow
 
@@ -90,7 +90,7 @@ void display()
     glClear(GL_COLOR_BUFFER_BIT);
     check();
     //printf("x pos = %f y pos = %f trianglex[0] = %f triangley[0] = %f\n",xpos,ypos,triangleX[0],triangleY[0]);
-    rectangularBoundry();
+    rectangularBoundary();
 
     //-----------------------Moving shapes------------------------
     glPushMatrix();
@@ -272,7 +272,7 @@ void intro()
     glPushMatrix();
         glTranslatef(350,500,0);
         glScalef(0.3,0.3,1);
-        rectangularBoundry();
+        rectangularBoundary();
     glPopMatrix();
     glRasterPos3f(460,480,0);
         char msg5[] = "Boundry";

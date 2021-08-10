@@ -50,9 +50,9 @@ void finish()
 
 void check()
 {
-    for(int i=0; i<2; i++)
+    for(int i=0; i<5; i++)
     {
-        if(xpos>triangleX[i]-30 && xpos<triangleX[i]+140.0 && ypos>triangleY[i]-30.0 && ypos<triangleY[i]+50.0)
+        if(xpos>triangleX[i]-30 && xpos<triangleX[i]+120.0 && ypos>triangleY[i]-30.0 && ypos<triangleY[i]+50.0)
         {
             printf("\nYou touched the line ");
             glutDisplayFunc(finish);
@@ -86,11 +86,20 @@ void rectangularBoundary()
 
 void display()
 {
+
     glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
     check();
     //printf("x pos = %f y pos = %f trianglex[0] = %f triangley[0] = %f\n",xpos,ypos,triangleX[0],triangleY[0]);
     rectangularBoundary();
+
+    glColor3f(0.91,0.89,0.91);
+    glRasterPos3f(360,930,0);
+    char msg1[] = "BALL-DER-DASH!";
+    for(int i=0; i<strlen(msg1);i++)
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg1[i]);
+    glFlush();
+
 
     //-----------------------Moving shapes------------------------
     glPushMatrix();

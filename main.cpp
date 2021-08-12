@@ -11,17 +11,17 @@
 
 float thetha;
 int radius = 30;
-float xpos = 160;
-float ypos = 170;
+float xpos = 160; // x coordinate of circle
+float ypos = 170; // y coordinate of circle
 float speed = 0;
-int times = 0;
-float triangleX[5] = {250, 500, 700, 150, 450};
-float triangleY[5] = {350, 500, 620, 450, 700};
+int times = 0;    // no of times the triangle has reached bottom
+float triangleX[5] = {250, 500, 700, 150, 450};  // x coordinates or triangles
+float triangleY[5] = {350, 500, 620, 450, 700};  // y coordinates or triangles
 
 void ball()
 {
     glBegin(GL_POLYGON);
-    glColor3f(0.33, 0.43, 0.9); //green
+    glColor3f(0.33, 0.43, 0.9);
         for(int i=0; i<360; i++)
         {
             thetha = i*PI/180; //convert to radian
@@ -31,8 +31,8 @@ void ball()
 }
 void finish()
 {
-    glClearColor(0.99,0.99,0.29,1);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.99,0.99,0.29,1); //set background color
+    glClear(GL_COLOR_BUFFER_BIT);   //apply background color
 
     glColor3f(0.17,0.17,0.17);
     glRasterPos3f(370,490,0);
@@ -41,14 +41,14 @@ void finish()
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg1[i]);
     glutSwapBuffers();
     radius = 30;
-    xpos = 200;
-    ypos = 200;
+    xpos = 160;
+    ypos = 170;
     speed = 0;
     times = 0;
 }
 
 
-void check()
+void check() //check weather the circle
 {
     for(int i=0; i<5; i++)
     {
@@ -109,8 +109,8 @@ void display()
         if(triangleY[0]<100)
         {
             triangleY[0]=500;
-            triangleX[0] = rand()%720 +100;
-            times ++;
+            triangleX[0] = rand()%720 + 100;
+            times++;
             if(times == 5)
             {
                 speed = 0;
@@ -256,13 +256,13 @@ void init()// prepare the window for displaying
 }
 void intro()
 {
-    glClearColor(0.99,0.99,0.84,1);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(0,0,0);
-    glRasterPos3f(360,900,0);
+    glClearColor(0.99,0.99,0.84,1); // set the background color
+    glClear(GL_COLOR_BUFFER_BIT);   // apply the bg color
+    glColor3f(0,0,0); //set a color
+    glRasterPos3f(360,900,0); //set coordinates for text
     char msg1[] = "BALL-DER-DASH!";
     for(int i=0; i<strlen(msg1);i++)
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg1[i]);
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,msg1[i]); //display a char on screen
 
     glRasterPos3f(460,850,0);
     char msg2[] = "RULES!";
@@ -273,6 +273,7 @@ void intro()
         glTranslatef(150,650,0);
         ball();
     glPopMatrix();
+
     glRasterPos3f(128,580,0);
         char msg4[] = "Ball";
         for(int i=0; i<strlen(msg4);i++)
@@ -283,6 +284,7 @@ void intro()
         glScalef(0.3,0.3,1);
         rectangularBoundary();
     glPopMatrix();
+
     glRasterPos3f(460,480,0);
         char msg5[] = "Boundry";
         for(int i=0; i<strlen(msg5);i++)
